@@ -1,0 +1,23 @@
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: var(--header-height);
+  background-color: var(--main-font-color);
+  color: var(--main-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+header > h1.header-legend {
+  font-size: calc(var(--header-height) * 0.4);
+  font-weight: bold;
+  font-family: var(--title-font);
+}
+
+header > .header-description {
+  opacity: 0.75;
+}
