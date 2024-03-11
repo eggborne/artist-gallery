@@ -1,0 +1,5 @@
+.display-area {
+  flex-grow: 1;
+  background: var(--main-bg-color);
+  padding: var(--main-padding-vert) var(--main-padding-horiz);
+}

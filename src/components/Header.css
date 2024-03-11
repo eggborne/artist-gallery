@@ -1,7 +1,4 @@
 header {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100dvw;
   height: var(--header-height);
   background-color: var(--main-font-color);
@@ -9,7 +6,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5%;
+  padding: var(--header-padding-vert) var(--header-padding-horiz);
+  padding-right: calc(var(--header-padding-horiz) * 2);
+  gap: calc(var(--header-height) * 0.1);
+  z-index: 1;
 }
 
 header > h1.header-legend {
@@ -19,5 +19,8 @@ header > h1.header-legend {
 }
 
 header > .header-description {
+  font-size: calc(var(--header-height) * 0.225);
   opacity: 0.75;
+  flex-grow: 1;
+  text-align: right;
 }
