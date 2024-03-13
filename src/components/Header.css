@@ -1,11 +1,11 @@
 header {
   width: 100dvw;
   height: var(--header-height);
-  background-color: var(--main-font-color);
+  background-color: var(--header-bg-color);
   color: var(--main-bg-color);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: var(--header-padding-vert) var(--header-padding-horiz);
   padding-right: calc(var(--header-padding-horiz) * 2);
   gap: calc(var(--header-height) * 0.1);
@@ -13,14 +13,17 @@ header {
 }
 
 header > h1.header-legend {
-  font-size: calc(var(--header-height) * 0.4);
+  font-size: calc(var(--header-height) * 0.33);
   font-weight: bold;
   font-family: var(--title-font);
 }
 
 header > .header-description {
+  /* flex-grow: 1; */
   font-size: calc(var(--header-height) * 0.225);
-  opacity: 0.75;
-  flex-grow: 1;
   text-align: right;
+}
+
+#header-image {
+  height: calc(var(--header-height) * 0.9);
 }

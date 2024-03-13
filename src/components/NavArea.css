@@ -1,6 +1,7 @@
 nav {
   position: absolute;
   left: 0;
+  width: 10rem;
   background-color: var(--nav-area-bg-color);
   font-family: var(--nav-area-font);
   font-size: var(--nav-area-font-size);
@@ -10,21 +11,11 @@ nav {
   align-items: flex-start;
   justify-content: flex-start;
   padding: var(--main-padding-vert) var(--main-padding-horiz);
+  box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
   transition: transform 300ms ease, opacity 300ms ease;
 }
 
 nav:not(.showing) {
   transform: translateX(-100%);
   opacity: 0;
-}
-
-nav > a.nav-item {
-  max-width: 10rem;
-  font-weight: bold;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  margin: 0.5rem 0;
-  text-decoration: none;
 }

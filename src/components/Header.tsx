@@ -1,23 +1,20 @@
 import Hamburger from './Hamburger';
 import './Header.css'
+import headerSVG from '../assets/rrg_header.svg';
 
 interface HeaderProps {
-  hamburgerVisible: boolean,
   hamburgerOpen: boolean,
   toggleNavArea: () => void;
 }
 
 function Header(props: HeaderProps) {
-  
   return (
     <header>
-      {/* {props.hamburgerVisible && */}
-        <Hamburger handleClick={props.toggleNavArea} open={props.hamburgerOpen} />
-      {/* } */}
-      <h1 className='header-legend'>
-        Gallery Title
-      </h1>
-      <div className='header-description'>A short description of a few words</div>
+      <Hamburger handleClick={props.toggleNavArea} open={props.hamburgerOpen} />
+      {/* <h1 className='header-legend'>
+      </h1> */}
+      <img id='header-image' src={headerSVG} />
+      <div className='header-description'></div>
     </header>
   )
 }

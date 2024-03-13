@@ -1,9 +1,14 @@
 import './DisplayArea.css'
 
-function DisplayArea() {
+interface DisplayAreaProps {
+  pageShowing: string,
+}
+
+function DisplayArea(props: DisplayAreaProps) {
   return (
     <div className='display-area'>
-      display area!
+
+      displaying {props.pageShowing}
     </div>
   )
 }

@@ -4,40 +4,44 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* color: rgba(255, 255, 255, 0.87); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  /* --hamburger-size: calc(var(--header-height) * 0.85); */
+  
   --header-height: 3.5rem;
   --footer-height: 1.75rem;
-  --hamburger-size: calc(var(--header-height) * 0.85);
-  --main-bg-color: #5f7067;
-  --main-font-color: #dfdfbc;
-  --nav-area-bg-color: rgb(72, 78, 82);
+  --hamburger-size: 3rem;
+  --main-bg-color: #6f705f;
+  --header-bg-color: #dfdfbc;
+  --main-font-color: rgba(255, 255, 255, 0.87);;
+  --nav-area-bg-color: rgb(127, 132, 114);
+  --text-accent-color: yellow;
   --nav-area-font: "Helvetica";
   --nav-area-font-color: beige;
   --nav-area-font-size: 1rem;
-  --title-font: "Times New Roman";
+  --title-font: "Helvetica";
   --main-padding-vert: 1rem;
   --main-padding-horiz: 1rem;
   --header-padding-vert: 1rem;
   --header-padding-horiz: 0.325rem;
+  --nav-text-shadow: 0.1rem 0.05rem 0.25rem #000000;
 }
 
-*, * *, * * *, * * * *, * * * * * {
-  margin: 0;
+* {
   box-sizing: border-box;
   overscroll-behavior: none;
   pointer-events: none;
+  overflow: hidden;
 }
 
 body {
   min-width: 320px;
   max-width: 100dvw;
+  background-color: var(--main-bg-color);
   color: var(--main-font-color);
 }
 
@@ -49,8 +53,41 @@ h1 {
 #root {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: red;
-  height: 100dvh;
+  align-items: stretch;
+  justify-content: space-between;
+  /* height: 100dvh; */
+}
+
+a,
+button,
+input {
+  pointer-events: all;
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Remove default focus outline */
+}
+
+a:focus,
+button:focus {
+  color: var(--text-accent-color) !important;
+}
+
+@media (min-width: 728px) and (orientation: landscape) {
+
+  header {
+    padding: var(--header-padding-vert);
+  }
+
+  .nav-area {
+    position: static;
+    box-shadow: none;
+    background-color: var(--main-bg-color);
+    text-shadow: var(--nav-text-shadow);
+  }
+
+  .hamburger {
+    display: none;
+  }
+
 }
