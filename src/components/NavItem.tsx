@@ -1,17 +1,24 @@
 import './NavItem.css';
 import classNames from 'classnames';
 
-export interface NavItemProps {
+interface NavItemProps {
   id: string;
   label: string;
   href: string;
+  highlighted: boolean;
+  handleClickNavItem: (newRoute: string) => void;
 }
 
 function NavItem(props: NavItemProps) {
-  const { id, label, href } = props;
-  const navItemClass = classNames('nav-item')
+  const { id, label, href, highlighted, handleClickNavItem } = props;
+  const navItemClass = classNames('nav-item', { highlighted });
+
+  function onClickNavItem() {
+    handleClickNavItem(href);
+  }
+
   return (
-    <a id={id} href={href} className={navItemClass}>
+    <a onClick={onClickNavItem} id={id} className={navItemClass}>
       {label}
     </a>
   )

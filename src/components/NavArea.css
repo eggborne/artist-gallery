@@ -2,6 +2,7 @@ nav {
   position: absolute;
   left: 0;
   width: 10rem;
+  height: calc(100dvh - var(--header-height) - var(--footer-height));
   background-color: var(--nav-area-bg-color);
   font-family: var(--nav-area-font);
   font-size: var(--nav-area-font-size);
@@ -10,12 +11,17 @@ nav {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: var(--main-padding-vert) var(--main-padding-horiz);
+  padding: var(--main-padding-vert) calc(var(--main-padding-horiz) * 1.25);
   box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
+  text-shadow: var(--nav-text-shadow);
   transition: transform 300ms ease, opacity 300ms ease;
 }
 
-nav:not(.showing) {
+nav:not(.visible) {
   transform: translateX(-100%);
   opacity: 0;
+}
+
+p {
+  margin: 1rem;
 }

@@ -5,6 +5,11 @@ main {
   height: calc(100dvh - var(--header-height) - var(--footer-height));
 }
 
+.site-section {
+  height: 100%;
+  padding: var(--main-padding-vert) var(--main-padding-horiz);
+}
+
 .horizontal-curve {
   width: 100dvw;
   height: var(--footer-height);

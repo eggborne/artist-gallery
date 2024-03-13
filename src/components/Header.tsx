@@ -11,10 +11,7 @@ function Header(props: HeaderProps) {
   return (
     <header>
       <Hamburger handleClick={props.toggleNavArea} open={props.hamburgerOpen} />
-      {/* <h1 className='header-legend'>
-      </h1> */}
       <img id='header-image' src={headerSVG} />
-      <div className='header-description'></div>
     </header>
   )
 }

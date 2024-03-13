@@ -8,3 +8,7 @@ a.nav-item {
   text-align: left;
   margin: 0.5rem 0;
 }
+
+.nav-item.highlighted {
+  color: yellow;
+}

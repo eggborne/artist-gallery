@@ -13,12 +13,13 @@ export interface userNavObject {
   id: string;
   label: string;
   href: string;
+  handleClickNavItem: (newRoute: string) => void;
 }
 
-const userNavItems:Array<userNavObject> = [
-  { id: 'nav-0', label: 'gallery', href: '/' },
-  { id: 'nav-1', label: 'about', href: '/about' },
-  { id: 'nav-1', label: 'contact', href: '/gallery' },
+const userNavItems: Array<userNavObject> = [
+  { id: 'nav-0', label: 'gallery', href: 'gallery', handleClickNavItem: () => undefined },
+  { id: 'nav-1', label: 'about', href: 'about', handleClickNavItem: () => undefined },
+  { id: 'nav-2', label: 'contact', href: 'contact', handleClickNavItem: () => undefined },
 ];
 
 function App() {
@@ -30,11 +31,16 @@ function App() {
     setNavShowing(!current);
   }
 
+  function changeNavRoute(newRoute: string) {
+    setPageShowing(newRoute);
+    toggleNavArea();
+  }
+
   return (
     <>
       <Header hamburgerOpen={isMobile && navShowing} toggleNavArea={toggleNavArea} />
       <main>
-        <NavArea navItems={ userNavItems } showing={navShowing} />
+        <NavArea handleClickNavItem={changeNavRoute} navItems={userNavItems} pageShowing={pageShowing} visible={navShowing} />
         <DisplayArea pageShowing={pageShowing} />
       </main>
       <Footer />

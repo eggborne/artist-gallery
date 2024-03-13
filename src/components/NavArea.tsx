@@ -5,16 +5,18 @@ import NavItem from './NavItem';
 
 interface NavAreaProps {
   navItems: Array<userNavObject>;
-  showing: boolean;
+  visible: boolean;
+  pageShowing: string;
+  handleClickNavItem: (newRoute: string) => void
 }
 
 function NavArea(props: NavAreaProps) {
-  const { navItems, showing } = props;
-  const navAreaClass = classNames('nav-area', { showing })
+  const { navItems, visible, pageShowing, handleClickNavItem } = props;
+  const navAreaClass = classNames('nav-area', { visible });
   return (
     <nav className={navAreaClass}>
       {navItems.map(item =>
-        <NavItem id={item.id} label={item.label} href={item.href} />        
+        <NavItem handleClickNavItem={handleClickNavItem} key={item.id} highlighted={pageShowing === item.href} id={item.id} label={item.label} href={item.href} />        
       )}
     </nav>
   )

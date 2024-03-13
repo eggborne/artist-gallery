@@ -7,21 +7,8 @@ header {
   align-items: center;
   justify-content: center;
   padding: var(--header-padding-vert) var(--header-padding-horiz);
-  padding-right: calc(var(--header-padding-horiz) * 2);
   gap: calc(var(--header-height) * 0.1);
   z-index: 1;
-}
-
-header > h1.header-legend {
-  font-size: calc(var(--header-height) * 0.33);
-  font-weight: bold;
-  font-family: var(--title-font);
-}
-
-header > .header-description {
-  /* flex-grow: 1; */
-  font-size: calc(var(--header-height) * 0.225);
-  text-align: right;
 }
 
 #header-image {

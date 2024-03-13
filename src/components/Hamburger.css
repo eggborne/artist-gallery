@@ -1,7 +1,7 @@
 .hamburger {
   position: fixed;
-  top: 1;
-  left: 0;
+  top: calc((var(--header-height) - var(--hamburger-size)) / 2);
+  left: calc((var(--header-height) - var(--hamburger-size)) / 2);
   width: var(--hamburger-size);
   min-width: var(--hamburger-size);
   height: var(--hamburger-size);
@@ -19,23 +19,34 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  overflow: visible;
 }
 
 .hamburger-bar {
   background-color: bisque;
-  border-radius: calc(var(--hamburger-size) / 16);
+  border-radius: calc(var(--hamburger-size) / 20);
   height: calc(var(--hamburger-size) / 20);
   transition: transform 200ms ease;
 }
 
+.hamburger.open .hamburger-bar {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: pink;
+}
+
+.hamburger-bar:not(:nth-child(2)) {
+  transform-origin: left;
+}
+
 .hamburger.open .hamburger-bar:first-child {
-  transform: rotate(-45deg) scaleX(80%);
+  transform: translateX(calc(var(--hamburger-size) / 20)) translateY(calc(var(--hamburger-size) * 0.26)) rotate(-45deg) scaleX(50%);
 }
 
 .hamburger.open .hamburger-bar:nth-child(2) {
-  transform: scaleX(80%);
+  transform: scaleX(85%);
 }
 
 .hamburger.open .hamburger-bar:last-child {
-  transform: rotate(45deg);
+  transform: translateX(calc(var(--hamburger-size) / 20)) translateY(calc(var(--hamburger-size) * -0.26)) rotate(45deg) scaleX(50%);
 }
