@@ -6,8 +6,7 @@ interface HamburgerProps {
   handleClick: () => void;
 }
 
-function Hamburger(props: HamburgerProps) {
-  const { open, handleClick } = props;
+function Hamburger({ open, handleClick }: HamburgerProps) {
   const hamburgerClass = classNames('hamburger', { open })
   
   return (

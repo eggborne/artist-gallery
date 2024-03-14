@@ -7,10 +7,10 @@ interface HeaderProps {
   toggleNavArea: () => void;
 }
 
-function Header(props: HeaderProps) {
+function Header({ hamburgerOpen, toggleNavArea }: HeaderProps) {
   return (
     <header>
-      <Hamburger handleClick={props.toggleNavArea} open={props.hamburgerOpen} />
+      <Hamburger handleClick={toggleNavArea} open={hamburgerOpen} />
       <img id='header-image' src={headerSVG} />
     </header>
   )

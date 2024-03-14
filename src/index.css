@@ -8,11 +8,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
+
+  --actual-height: 100dvh;
   --header-height: 4rem;
   --footer-height: 1.75rem;
   --hamburger-size: calc(var(--header-height) * 0.85);
   --main-bg-color: #6f705f;
-  --header-bg-color: #dfdfbc;
+  /* --header-bg-color: #dfdfbc; */
+  --header-bg-color: #3f3f2f;
   --main-font-color: rgba(255, 255, 255, 0.87);;
   --nav-area-bg-color: rgb(127, 132, 114);
   --text-accent-color: yellow;
@@ -25,6 +28,8 @@
   --header-padding-vert: 1rem;
   --header-padding-horiz: 0.325rem;
   --nav-text-shadow: 0.1rem 0.05rem 0.25rem rgb(0, 0, 0, 0.5);
+
+  --hamburger-animation-duration: 200ms;
 }
 
 * {
@@ -60,6 +65,7 @@ input {
   outline: none;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
 a:focus,
@@ -75,10 +81,11 @@ h1 {
 
 @media (min-width: 728px) and (orientation: landscape) {
 
-  .nav-area {
+  nav.nav-area {
     position: static;
     box-shadow: none;
     background-color: var(--main-bg-color);
+    transform: 0 !important;
   }
 
   .hamburger {

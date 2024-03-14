@@ -1,8 +1,8 @@
-nav {
+nav.nav-area {
   position: absolute;
   left: 0;
   width: 10rem;
-  height: calc(100dvh - var(--header-height) - var(--footer-height));
+  height: calc(var(--actual-height) - var(--header-height) - var(--footer-height));
   background-color: var(--nav-area-bg-color);
   font-family: var(--nav-area-font);
   font-size: var(--nav-area-font-size);
@@ -17,11 +17,11 @@ nav {
   transition: transform 300ms ease, opacity 300ms ease;
 }
 
-nav:not(.visible) {
+nav.nav-area:not(.visible) {
   transform: translateX(-100%);
   opacity: 0;
 }
 
-p {
+nav p {
   margin: 1rem;
 }

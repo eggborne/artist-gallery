@@ -10,13 +10,12 @@ interface NavAreaProps {
   handleClickNavItem: (newRoute: string) => void
 }
 
-function NavArea(props: NavAreaProps) {
-  const { navItems, visible, pageShowing, handleClickNavItem } = props;
+function NavArea({ navItems, visible, pageShowing, handleClickNavItem }: NavAreaProps) {
   const navAreaClass = classNames('nav-area', { visible });
   return (
     <nav className={navAreaClass}>
       {navItems.map(item =>
-        <NavItem handleClickNavItem={handleClickNavItem} key={item.id} highlighted={pageShowing === item.href} id={item.id} label={item.label} href={item.href} />        
+        <NavItem handleClickNavItem={handleClickNavItem} onScreen={ visible } key={item.id} highlighted={pageShowing === item.href} id={item.id} label={item.label} href={item.href} />        
       )}
     </nav>
   )

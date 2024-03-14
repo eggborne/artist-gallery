@@ -1,17 +1,36 @@
+import { useEffect, useState } from 'react';
 import './NavItem.css';
 import classNames from 'classnames';
+
+const pause = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 interface NavItemProps {
   id: string;
   label: string;
   href: string;
   highlighted: boolean;
+  onScreen: boolean;
   handleClickNavItem: (newRoute: string) => void;
 }
 
-function NavItem(props: NavItemProps) {
-  const { id, label, href, highlighted, handleClickNavItem } = props;
-  const navItemClass = classNames('nav-item', { highlighted });
+function NavItem({ id, label, href, highlighted, onScreen, handleClickNavItem }: NavItemProps) {
+  
+  const [revealed, setRevealed] = useState(false);
+  
+  const navItemClass = classNames('nav-item', { highlighted }, { revealed });
+
+  const idNumber = parseInt(id[id.length - 1]);
+
+  console.log('id', idNumber)
+
+  useEffect(() => {
+    const pauseForAnimation = async () => {
+      await pause(200 + (idNumber * 100));
+      console.warn('called nav item effect');
+      setRevealed(onScreen);
+    };
+    pauseForAnimation();
+  }); // no dep array means it runs every render
 
   function onClickNavItem() {
     handleClickNavItem(href);

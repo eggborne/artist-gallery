@@ -11,6 +11,22 @@
   background-color: #633980;
   border-radius: 50%;
   pointer-events: all;
+  opacity: 0.75;
+}
+
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  background-color: red;
+  opacity: 0;
+  transition: opacity var(--hamburger-animation-duration) ease;
+  z-index: -1;
+}
+
+.hamburger.open::after {
+  opacity: 0.2;
 }
 
 .hamburger-bar-container {
@@ -26,7 +42,7 @@
   background-color: bisque;
   border-radius: calc(var(--hamburger-size) / 20);
   height: calc(var(--hamburger-size) / 20);
-  transition: transform 200ms ease;
+  transition: transform var(--hamburger-animation-duration) ease;
 }
 
 .hamburger.open .hamburger-bar {

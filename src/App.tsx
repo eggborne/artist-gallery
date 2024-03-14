@@ -16,6 +16,7 @@ export interface userNavObject {
   handleClickNavItem: (newRoute: string) => void;
 }
 
+// these are to come from DB!
 const userNavItems: Array<userNavObject> = [
   { id: 'nav-0', label: 'gallery', href: 'gallery', handleClickNavItem: () => undefined },
   { id: 'nav-1', label: 'about', href: 'about', handleClickNavItem: () => undefined },
@@ -27,18 +28,18 @@ function App() {
   const [pageShowing, setPageShowing] = useState('gallery');
 
   function toggleNavArea() {
-    const current = navShowing;
-    setNavShowing(!current);
+    console.log('toggled nav')
+    setNavShowing(!navShowing);
   }
 
   function changeNavRoute(newRoute: string) {
     setPageShowing(newRoute);
-    toggleNavArea();
+    isMobile && toggleNavArea();
   }
 
   return (
     <>
-      <Header hamburgerOpen={isMobile && navShowing} toggleNavArea={toggleNavArea} />
+      <Header hamburgerOpen={navShowing} toggleNavArea={toggleNavArea} />
       <main>
         <NavArea handleClickNavItem={changeNavRoute} navItems={userNavItems} pageShowing={pageShowing} visible={navShowing} />
         <DisplayArea pageShowing={pageShowing} />

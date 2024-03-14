@@ -7,6 +7,14 @@ a.nav-item {
   padding: 0;
   text-align: left;
   margin: 0.5rem 0;
+  opacity: 0;
+  transform: translateX(25%);
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+a.nav-item.revealed {
+  opacity: 1;
+  transform: none;
 }
 
 .nav-item.highlighted {
