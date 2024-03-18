@@ -8,28 +8,27 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-
   --actual-height: 100dvh;
-  --header-height: 4rem;
+
+  /* --header-height: 4rem;
   --footer-height: 1.75rem;
-  --hamburger-size: calc(var(--header-height) * 0.85);
+  --hamburger-size: 3.5rem;
   --main-bg-color: #6f705f;
-  /* --header-bg-color: #dfdfbc; */
+  --main-bg-color: red;
   --header-bg-color: #3f3f2f;
   --main-font-color: rgba(255, 255, 255, 0.87);;
   --nav-area-bg-color: rgb(127, 132, 114);
   --text-accent-color: yellow;
+  --title-font: "Helvetica";
   --nav-area-font: "Helvetica";
   --nav-area-font-color: beige;
   --nav-area-font-size: 1rem;
-  --title-font: "Helvetica";
   --main-padding-vert: 1rem;
   --main-padding-horiz: 1rem;
   --header-padding-vert: 1rem;
   --header-padding-horiz: 0.325rem;
   --nav-text-shadow: 0.1rem 0.05rem 0.25rem rgb(0, 0, 0, 0.5);
-
-  --hamburger-animation-duration: 200ms;
+  --hamburger-animation-duration: 200ms; */
 }
 
 * {
@@ -44,11 +43,23 @@ body {
   max-width: 100dvw;
   background-color: var(--main-bg-color);
   color: var(--main-font-color);
+  opacity: 0;
+  filter: saturate(0);
+}
+
+body.revealed {
+  transition: opacity 800ms ease, filter 1200ms ease;
+  opacity: 1;
+  filter: none;
 }
 
 h1 {
-  font-size: 3.2em;
   line-height: 1.1;
+  font-size: calc(var(--header-height) / 2);
+  font-weight: bold;
+  font-family: var(--title-font);
+  margin: 0;
+  margin-bottom: 1rem;
 }
 
 #root {
@@ -71,12 +82,6 @@ input {
 a:focus,
 button:focus {
   color: var(--text-accent-color) !important;
-}
-
-h1 {
-  font-size: calc(var(--header-height) * 0.33);
-  font-weight: bold;
-  font-family: var(--title-font);
 }
 
 @media (min-width: 728px) and (orientation: landscape) {

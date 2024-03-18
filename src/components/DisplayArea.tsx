@@ -1,4 +1,5 @@
 import About from './About';
+import Admin from './Admin';
 import Contact from './Contact';
 import './DisplayArea.css'
 import Gallery from './Gallery';
@@ -19,6 +20,9 @@ function DisplayArea({ pageShowing }: DisplayAreaProps) {
           :
         pageShowing === 'contact' ?
           <Contact />
+          :
+        pageShowing === 'admin' ?
+          <Admin />
           :
           <p>no nav clicked</p>
       }

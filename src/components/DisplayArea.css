@@ -1,6 +1,8 @@
 .display-area {
   flex-grow: 1;
   background: var(--main-bg-color);
-  text-align: right;
-  /* padding: var(--main-padding-vert) var(--main-padding-horiz); */
+  width: min-content;
+  /* text-align: right; */
+  padding-top: calc(var(--main-padding-vert) / 2);
+  padding-right: var(--main-padding-horiz);
 }
