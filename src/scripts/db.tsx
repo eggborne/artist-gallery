@@ -56,7 +56,6 @@ export const getCurrentCSSValues = () => {
 
 export const applyCSSValues = (newValuesObj: Record<string, string>) => {
   for (let [attributeName, newValue] of Object.entries(newValuesObj)) {
-    console.warn('setting', attributeName, 'to', newValue);
     document.documentElement.style.setProperty(attributeName, newValue);
   }
 }
@@ -71,7 +70,7 @@ export const getUserPreferences = async (prefID: string) => {
     }
   });
   if (response.data) {
-    return JSON.parse(response.data.CSSValues);
+    return response.data.CSSValues;
   } else {
     console.warn('NO RESPONSE.DATA');
   }

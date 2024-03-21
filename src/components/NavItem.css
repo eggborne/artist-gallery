@@ -18,5 +18,5 @@ a.nav-item.revealed {
 }
 
 .nav-item.highlighted {
-  color: yellow;
+  color:var(--text-accent-color);
 }

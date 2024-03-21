@@ -1,8 +1,4 @@
 .display-area {
   flex-grow: 1;
   background: var(--main-bg-color);
-  width: min-content;
-  /* text-align: right; */
-  padding-top: calc(var(--main-padding-vert) / 2);
-  padding-right: var(--main-padding-horiz);
 }

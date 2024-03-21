@@ -19,6 +19,9 @@ addEventListener('load', async () => {
   document.body.classList.add('revealed');
 });
 
+const LIVE = location.href.includes('live');
+let liveInterval: any;
+
 export interface userNavObject {
   id: string;
   label: string;
@@ -43,17 +46,23 @@ function App() {
   async function getPrefs() {
     if (!busyFetching) {
       setBusyFetching(true);
-      const userCSSPreferences = await getUserPreferences('1');
-      setUserCSSPreferences(userCSSPreferences);
+      const newCSSPreferences = await getUserPreferences(LIVE ? '2' : '1');
+      if (newCSSPreferences !== JSON.stringify(userCSSPreferences)) {
+        setUserCSSPreferences(JSON.parse(newCSSPreferences));
+      } else {
+        console.warn('SETTINGS DID NAR CHANGE')
+      }
       setBusyFetching(false);
+      console.warn('fetched prefs')
     } else {
       console.warn('---------- DID NOT FETCH DUE TO STILL BUSY!')
     }
   }
+  
   useEffect(() => {
-    // getPrefs();
-    if (location.href.includes('live')) {
-      setInterval(getPrefs, 500);
+    getPrefs();
+    if (LIVE && !liveInterval) {
+      liveInterval = setInterval(getPrefs, 600);
     }
   }, []);
 

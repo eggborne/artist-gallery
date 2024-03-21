@@ -1,5 +1,5 @@
 nav.nav-area {
-  position: absolute;
+  position: fixed;
   left: 0;
   width: 10rem;
   height: calc(var(--actual-height) - var(--header-height) - var(--footer-height));

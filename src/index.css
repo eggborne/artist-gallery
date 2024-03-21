@@ -89,7 +89,7 @@ button:focus {
   nav.nav-area {
     position: static;
     box-shadow: none;
-    background-color: var(--main-bg-color);
+    /* background-color: var(--main-bg-color); */
     transform: 0 !important;
   }
 
