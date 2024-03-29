@@ -7,28 +7,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
   --actual-height: 100dvh;
-
-  /* --header-height: 4rem;
-  --footer-height: 1.75rem;
-  --hamburger-size: 3.5rem;
-  --main-bg-color: #6f705f;
-  --main-bg-color: red;
-  --header-bg-color: #3f3f2f;
-  --main-font-color: rgba(255, 255, 255, 0.87);;
-  --nav-area-bg-color: rgb(127, 132, 114);
-  --text-accent-color: yellow;
-  --title-font: "Helvetica";
-  --nav-area-font: "Helvetica";
-  --nav-area-font-color: beige;
-  --nav-area-font-size: 1rem;
-  --main-padding-vert: 1rem;
-  --main-padding-horiz: 1rem;
-  --header-padding-vert: 1rem;
-  --header-padding-horiz: 0.325rem;
-  --nav-text-shadow: 0.1rem 0.05rem 0.25rem rgb(0, 0, 0, 0.5);
-  --hamburger-animation-duration: 200ms; */
 }
 
 * {
@@ -48,7 +27,7 @@ body {
 }
 
 body.revealed {
-  transition: opacity 800ms ease, filter 1200ms ease;
+  transition: opacity 800ms ease, filter 1500ms ease;
   opacity: 1;
   filter: none;
 }
@@ -84,13 +63,24 @@ button:focus {
   color: var(--text-accent-color) !important;
 }
 
+.preview-message {
+  position: fixed;
+  bottom: 0;
+  left: 0.25rem;
+  color: #ff0000;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  opacity: 0.75;
+  z-index: 2;
+}
+
 @media (min-width: 728px) and (orientation: landscape) {
 
   nav.nav-area {
     position: static;
     box-shadow: none;
-    /* background-color: var(--main-bg-color); */
     transform: 0 !important;
+    min-width: 10rem;
   }
 
   .hamburger {

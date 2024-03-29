@@ -1,26 +1,24 @@
 import 'normalize.css';
 import './App.css';
 import { isMobile } from 'react-device-detect';
-
-// import { useEffect, useState } from 'react';
 import { useEffect, useState } from 'react';
-
-// import { applyCSSValues, defaultCSSPreferences, getCurrentCSSValues, getUserPreferences, userCSSPreferences } from './scripts/db';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
 import NavArea from './components/NavArea';
 import DisplayArea from './components/DisplayArea';
 import { pause } from './scripts/util';
-import { applyCSSValues, defaultCSSPreferences, getUserPreferences } from './scripts/db';
+import { applyCSSValues } from './scripts/db';
+import { get, off, onValue, ref } from 'firebase/database';
+import { database } from './firebase-config';
+
+const SITE_ID = '13467d21-a3a5-4ba5-88b3-ce98be547f90';
 
 addEventListener('load', async () => {
   await pause(10);
   document.body.classList.add('revealed');
 });
 
-const LIVE = location.href.includes('live');
-let liveInterval: any;
+const clientContext = location.href.includes('test') ? 'test' : 'prod';
 
 export interface userNavObject {
   id: string;
@@ -29,7 +27,7 @@ export interface userNavObject {
   handleClickNavItem: (newRoute: string) => void;
 }
 
-// these are to come from DB!
+// these are to come from DB
 const userNavItems: Array<userNavObject> = [
   { id: 'nav-0', label: 'gallery', href: 'gallery', handleClickNavItem: () => undefined },
   { id: 'nav-1', label: 'about', href: 'about', handleClickNavItem: () => undefined },
@@ -41,28 +39,37 @@ function App() {
   const [navShowing, setNavShowing] = useState(!isMobile);
   const [userCSSPreferences, setUserCSSPreferences] = useState({});
   const [pageShowing, setPageShowing] = useState('gallery');
-  const [busyFetching, setBusyFetching] = useState(false);
-
-  async function getPrefs() {
-    if (!busyFetching) {
-      setBusyFetching(true);
-      const newCSSPreferences = await getUserPreferences(LIVE ? '2' : '1');
-      if (newCSSPreferences !== JSON.stringify(userCSSPreferences)) {
-        setUserCSSPreferences(JSON.parse(newCSSPreferences));
-      } else {
-        console.warn('SETTINGS DID NAR CHANGE')
-      }
-      setBusyFetching(false);
-      console.warn('fetched prefs')
-    } else {
-      console.warn('---------- DID NOT FETCH DUE TO STILL BUSY!')
-    }
-  }
   
+  // useEffect(() => {
+  //   getPrefs();
+  //   if (LIVE && !liveInterval) {
+  //     liveInterval = setInterval(getPrefs, 600);
+  //   }
+  // }, []);
+
   useEffect(() => {
-    getPrefs();
-    if (LIVE && !liveInterval) {
-      liveInterval = setInterval(getPrefs, 600);
+    const getPreferences = async () => {
+      const dbUrl = `preferences/${SITE_ID}/${clientContext}`;
+      console.log('calling to', dbUrl);
+      const dataRef = ref(database, dbUrl);
+      const snapshot = await get(dataRef);
+      if (snapshot.exists()) {
+        const nextPrefs = snapshot.val();
+        setUserCSSPreferences(nextPrefs);
+      } else {
+        console.log('No data available at this path');
+      }
+    }
+    getPreferences();
+    if (clientContext === 'test') {
+      console.log('TEST MODE - subscribing to changes');
+      const dbUrl = `preferences/${SITE_ID}/test`;
+      const dataRef = ref(database, dbUrl);
+      onValue(dataRef, (snapshot) => {
+        const nextPrefs = snapshot.val();
+        setUserCSSPreferences(nextPrefs);
+        return () => off(dataRef);
+      });
     }
   }, []);
 
@@ -88,6 +95,7 @@ function App() {
         <DisplayArea pageShowing={pageShowing} />
       </main>
       <Footer />
+        {clientContext === 'test' && <div className='preview-message'>PREVIEW MODE</div>}
     </>
   )
 }
