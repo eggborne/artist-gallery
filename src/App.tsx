@@ -11,7 +11,7 @@ import { applyCSSValues } from './scripts/db';
 import { get, off, onValue, ref } from 'firebase/database';
 import { database } from './firebase-config';
 
-const SITE_ID = '13467d21-a3a5-4ba5-88b3-ce98be547f90';
+const SITE_ID = 'rachel-gallery';
 
 addEventListener('load', async () => {
   await pause(10);
@@ -49,7 +49,7 @@ function App() {
 
   useEffect(() => {
     const getPreferences = async () => {
-      const dbUrl = `preferences/${SITE_ID}/${clientContext}`;
+      const dbUrl = `sites/${SITE_ID}/${clientContext}`;
       console.log('calling to', dbUrl);
       const dataRef = ref(database, dbUrl);
       const snapshot = await get(dataRef);
@@ -63,7 +63,7 @@ function App() {
     getPreferences();
     if (clientContext === 'test') {
       console.log('TEST MODE - subscribing to changes');
-      const dbUrl = `preferences/${SITE_ID}/test`;
+      const dbUrl = `sites/${SITE_ID}/test`;
       const dataRef = ref(database, dbUrl);
       onValue(dataRef, (snapshot) => {
         const nextPrefs = snapshot.val();

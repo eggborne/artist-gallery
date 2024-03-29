@@ -14,7 +14,8 @@ nav.nav-area {
   /* padding: var(--main-padding-vert) calc(var(--main-padding-horiz) * 2); */
   padding: var(--nav-padding-vert) var(--nav-padding-horiz);
   box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
-  text-shadow: var(--nav-text-shadow);
+  text-shadow: var(--nav-text-shadow-x) var(--nav-text-shadow-y) var(--nav-text-shadow-blur) var(--nav-text-shadow-color);
+  /* text-shadow: 1rem 1rem 0rem black;  */
   transition: transform 300ms ease, opacity 300ms ease;
 }
 
