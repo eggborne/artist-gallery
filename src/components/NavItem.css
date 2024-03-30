@@ -9,12 +9,13 @@ a.nav-item {
   opacity: 0;
   overflow: visible;
   transform: translateX(25%);
-  transition: transform 200ms ease, opacity 200ms ease;
 }
 
 a.nav-item.revealed {
   opacity: 1;
   transform: none;
+  transition: transform 200ms ease, opacity 200ms ease;
+  transition-delay: calc(var(--hamburger-animation-duration) / 3);
 }
 
 .nav-item.highlighted {

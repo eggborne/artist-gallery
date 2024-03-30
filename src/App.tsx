@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import NavArea from './components/NavArea';
 import DisplayArea from './components/DisplayArea';
 import { pause } from './scripts/util';
-import { applyCSSValues } from './scripts/db';
+import { applyCSSValues } from './scripts/util';
 import { get, off, onValue, ref } from 'firebase/database';
 import { database } from './firebase-config';
 
@@ -32,45 +32,39 @@ const userNavItems: Array<userNavObject> = [
   { id: 'nav-0', label: 'gallery', href: 'gallery', handleClickNavItem: () => undefined },
   { id: 'nav-1', label: 'about', href: 'about', handleClickNavItem: () => undefined },
   { id: 'nav-2', label: 'contact', href: 'contact', handleClickNavItem: () => undefined },
-  { id: 'nav-3', label: 'admin', href: 'admin', handleClickNavItem: () => undefined },
 ];
 
 function App() {
   const [navShowing, setNavShowing] = useState(!isMobile);
   const [userCSSPreferences, setUserCSSPreferences] = useState({});
   const [pageShowing, setPageShowing] = useState('gallery');
-  
-  // useEffect(() => {
-  //   getPrefs();
-  //   if (LIVE && !liveInterval) {
-  //     liveInterval = setInterval(getPrefs, 600);
-  //   }
-  // }, []);
 
   useEffect(() => {
     const getPreferences = async () => {
       const dbUrl = `sites/${SITE_ID}/${clientContext}`;
       console.log('calling to', dbUrl);
       const dataRef = ref(database, dbUrl);
-      const snapshot = await get(dataRef);
-      if (snapshot.exists()) {
+      try {
+        const snapshot = await get(dataRef);
         const nextPrefs = snapshot.val();
-        setUserCSSPreferences(nextPrefs);
-      } else {
-        console.log('No data available at this path');
+        if (clientContext === 'test') {
+          console.log('TEST MODE - subscribing to changes');
+          const dbUrl = `sites/${SITE_ID}/test`;
+          const dataRef = ref(database, dbUrl);
+          onValue(dataRef, (snapshot) => {
+            const nextPrefs = snapshot.val();
+            setUserCSSPreferences(nextPrefs);
+            return () => off(dataRef);
+          });
+        } else {
+          setUserCSSPreferences(nextPrefs);
+        }
+      } catch (error) {
+        console.error('error getting preferences', error);
       }
     }
     getPreferences();
-    if (clientContext === 'test') {
-      console.log('TEST MODE - subscribing to changes');
-      const dbUrl = `sites/${SITE_ID}/test`;
-      const dataRef = ref(database, dbUrl);
-      onValue(dataRef, (snapshot) => {
-        const nextPrefs = snapshot.val();
-        setUserCSSPreferences(nextPrefs);
-        return () => off(dataRef);
-      });
-    }
+    
   }, []);
 
   useEffect(() => {

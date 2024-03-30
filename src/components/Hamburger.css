@@ -1,5 +1,5 @@
 .hamburger {
-  position: fixed;
+  position: absolute;
   top: calc((var(--header-height) - var(--hamburger-size)) / 2);
   left: calc((var(--header-height) - var(--hamburger-size)) / 2);
   width: var(--hamburger-size);
@@ -8,25 +8,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #633980;
-  border-radius: 50%;
+  background-color: var(--hamburger-color);
+  border-radius: var(--hamburger-roundness);
   pointer-events: all;
   opacity: 0.75;
+  transition: background-color var(--hamburger-animation-duration) ease;
 }
 
-.hamburger::after {
-  content: '';
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  background-color: red;
-  opacity: 0;
-  transition: opacity var(--hamburger-animation-duration) ease;
-  z-index: -1;
-}
-
-.hamburger.open::after {
-  opacity: 0.2;
+.hamburger.open {
+  background-color: var(--hamburger-on-color);
 }
 
 .hamburger-bar-container {
@@ -39,16 +29,15 @@
 }
 
 .hamburger-bar {
-  background-color: bisque;
+  background-color: var(--hamburger-line-color);
   border-radius: calc(var(--hamburger-size) / 20);
-  height: calc(var(--hamburger-size) / 20);
+  height: var(--hamburger-line-thickness);
   transition: transform var(--hamburger-animation-duration) ease;
 }
 
 .hamburger.open .hamburger-bar {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  background-color: pink;
 }
 
 .hamburger-bar:not(:nth-child(2)) {

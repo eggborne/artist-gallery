@@ -1,14 +1,14 @@
-import './Gallery.css'
+import './SiteSection.css'
 import classNames from 'classnames';
 
-// interface GalleryProps {
+// interface SiteSectionProps {
   // pageShowing: string,
 // }
 
-function Gallery() {
-  const galleryClass = classNames('site-section', 'gallery')
+function SiteSection() {
+  const siteSectionClass = classNames('site-section', 'gallery')
   return (
-    <div className={galleryClass}>
+    <div className={siteSectionClass}>
       <h1>Larger Text</h1>
       <div>
         <p>Velit squibble bonkers flibbertigibbet, conoodle artisizzle fizzle pop. Whooziwhatsit colorburst twizzle floof, gallery wanderlust in snickerdoodle dreamscapes. Zippity zap, globtrot squigglemorphs and doodlewhackers, bravely prance in kaleidoscope whispers.</p>
@@ -19,4 +19,4 @@ function Gallery() {
   )
 }
 
-export default Gallery;
+export default SiteSection;

@@ -1,8 +1,7 @@
 import About from './About';
-import Admin from './Admin';
 import Contact from './Contact';
 import './DisplayArea.css'
-import Gallery from './Gallery';
+import SiteSection from './SiteSection';
 
 interface DisplayAreaProps {
   pageShowing: string,
@@ -13,16 +12,13 @@ function DisplayArea({ pageShowing }: DisplayAreaProps) {
     <div className='display-area'>
       {
         pageShowing === 'gallery' ?
-          <Gallery />
+          <SiteSection />
           :
         pageShowing === 'about' ?
           <About />
           :
         pageShowing === 'contact' ?
           <Contact />
-          :
-        pageShowing === 'admin' ?
-          <Admin />
           :
           <p>no nav clicked</p>
       }

@@ -1,7 +1,7 @@
 nav.nav-area {
-  position: fixed;
+  position: absolute;
   left: 0;
-  width: max-content;
+  width: var(--nav-area-width);
   height: calc(var(--actual-height) - var(--header-height) - var(--footer-height));
   background-color: var(--nav-area-bg-color);
   font-family: var(--nav-area-font);
@@ -16,14 +16,10 @@ nav.nav-area {
   box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
   text-shadow: var(--nav-text-shadow-x) var(--nav-text-shadow-y) var(--nav-text-shadow-blur) var(--nav-text-shadow-color);
   /* text-shadow: 1rem 1rem 0rem black;  */
-  transition: transform 300ms ease, opacity 300ms ease;
+  transition: transform var(--hamburger-animation-duration) ease, opacity 300ms ease;
 }
 
 nav.nav-area:not(.visible) {
   transform: translateX(-100%);
   opacity: 0;
-}
-
-nav a {
-  margin: 1rem;
 }
