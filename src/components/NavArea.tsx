@@ -14,8 +14,8 @@ function NavArea({ navItems, visible, pageShowing, handleClickNavItem }: NavArea
   const navAreaClass = classNames('nav-area', { visible });
   return (
     <nav className={navAreaClass}>
-      {navItems.map(item =>
-        <NavItem handleClickNavItem={handleClickNavItem} onScreen={ visible } key={item.id} highlighted={pageShowing === item.href} id={item.id} label={item.label} href={item.href} />        
+      {navItems.map(({ id, label, href, handleClickNavItem }) =>
+        <NavItem handleClickNavItem={handleClickNavItem} onScreen={ visible } key={id} highlighted={pageShowing === href} id={id} label={label} href={href} />        
       )}
     </nav>
   )

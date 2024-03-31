@@ -9,7 +9,8 @@ import DisplayArea from './components/DisplayArea';
 import { pause } from './scripts/util';
 import { applyCSSValues } from './scripts/util';
 import { get, off, onValue, ref } from 'firebase/database';
-import { database } from './firebase-config';
+import { getDownloadURL, list, ref as storageRef } from 'firebase/storage';
+import { database, storage } from './firebase-config';
 
 const SITE_ID = 'rachel-gallery';
 
@@ -27,52 +28,68 @@ export interface userNavObject {
   handleClickNavItem: (newRoute: string) => void;
 }
 
-// these are to come from DB
-const userNavItems: Array<userNavObject> = [
-  { id: 'nav-0', label: 'gallery', href: 'gallery', handleClickNavItem: () => undefined },
-  { id: 'nav-1', label: 'about', href: 'about', handleClickNavItem: () => undefined },
-  { id: 'nav-2', label: 'contact', href: 'contact', handleClickNavItem: () => undefined },
-];
-
 function App() {
   const [navShowing, setNavShowing] = useState(!isMobile);
-  const [userCSSPreferences, setUserCSSPreferences] = useState({});
+  const [userPreferences, setUserPreferences] = useState({} as any);
+  const [userImages, setUserImages] = useState([] as any);
+  const [userNavItems, setUserNavItems] = useState({} as any);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [pageShowing, setPageShowing] = useState('gallery');
+
+  const getImageArray = async (siteImages: any) => {
+    const imagesRef = storageRef(storage, 'sites/' + SITE_ID + '/images');
+    const urls: object[] = [];
+    for (const image of siteImages) {
+      const imageRef = storageRef(imagesRef, image.name);
+      const url = await getDownloadURL(imageRef);
+      urls.push({ url, imageName: image.name, size: image.size });
+    }
+    return urls;
+  };
 
   useEffect(() => {
     const getPreferences = async () => {
       const dbUrl = `sites/${SITE_ID}/${clientContext}`;
-      console.log('calling to', dbUrl);
       const dataRef = ref(database, dbUrl);
       try {
         const snapshot = await get(dataRef);
         const nextPrefs = snapshot.val();
         if (clientContext === 'test') {
-          console.log('TEST MODE - subscribing to changes');
           const dbUrl = `sites/${SITE_ID}/test`;
           const dataRef = ref(database, dbUrl);
           onValue(dataRef, (snapshot) => {
             const nextPrefs = snapshot.val();
-            setUserCSSPreferences(nextPrefs);
+            setUserPreferences(nextPrefs);
             return () => off(dataRef);
           });
-        } else {
-          setUserCSSPreferences(nextPrefs);
         }
+        setUserPreferences(nextPrefs);
+        const nextNavItems = [];
+        for (let id in nextPrefs.sections) {
+          const { label, href, textContent } = nextPrefs.sections[id];
+          nextNavItems.push({ id, label, href, textContent, handleClickNavItem: changeNavRoute});
+        }
+        setUserNavItems(nextNavItems);
+        setDataLoaded(true);
       } catch (error) {
         console.error('error getting preferences', error);
       }
     }
     getPreferences();
-    
+    const listRef = storageRef(storage, 'sites/' + SITE_ID + '/images');
+    list(listRef).then(async result => {
+      const newImages = await getImageArray(result.items);
+      setUserImages(newImages);
+    });
   }, []);
+    
+
 
   useEffect(() => {
-    applyCSSValues(userCSSPreferences);
-  }, [userCSSPreferences])
+    applyCSSValues(userPreferences);
+  }, [userPreferences])
 
   function toggleNavArea() {
-    console.log('toggled nav')
     setNavShowing(!navShowing);
   }
 
@@ -85,8 +102,12 @@ function App() {
     <>
       <Header hamburgerOpen={navShowing} toggleNavArea={toggleNavArea} />
       <main>
-        <NavArea handleClickNavItem={changeNavRoute} navItems={userNavItems} pageShowing={pageShowing} visible={navShowing} />
-        <DisplayArea pageShowing={pageShowing} />
+        {dataLoaded && 
+        <>
+          <NavArea handleClickNavItem={changeNavRoute} navItems={userNavItems} pageShowing={pageShowing} visible={navShowing} />
+          <DisplayArea navItems={userNavItems} userImages={userImages} pageShowing={pageShowing} />
+        </>
+        }
       </main>
       <Footer />
         {clientContext === 'test' && <div className='preview-message'>PREVIEW MODE</div>}

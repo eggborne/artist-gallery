@@ -66,11 +66,13 @@ button:focus {
 .preview-message {
   position: fixed;
   bottom: 0;
-  left: 0.25rem;
+  left: 50%;
+  transform: translate(-50%, 0);
   color: #ff0000;
   font-size: 1.5rem;
   line-height: 1.2;
-  opacity: 0.75;
+  opacity: 0.5;
+  font-weight: bold;
   z-index: 2;
 }
 
@@ -81,6 +83,7 @@ button:focus {
     box-shadow: none;
     transform: 0 !important;
     min-width: 10rem;
+    height: auto;
   }
 
   .hamburger {

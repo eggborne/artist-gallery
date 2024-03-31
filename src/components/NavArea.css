@@ -2,7 +2,8 @@ nav.nav-area {
   position: absolute;
   left: 0;
   width: var(--nav-area-width);
-  height: calc(var(--actual-height) - var(--header-height) - var(--footer-height));
+  height: calc(var(--actual-height) - var(--header-height));
+
   background-color: var(--nav-area-bg-color);
   font-family: var(--nav-area-font);
   font-size: var(--nav-area-font-size);

@@ -6,7 +6,11 @@ footer {
   align-items: center;
   justify-content: flex-end;
   gap: 0.25rem;
-  padding: 0 var(--header-padding-vert);
   font-size: 0.8rem;
   z-index: 1;
+}
+
+footer a {
+  color: #ffffff33;
+  margin-right: 0.75rem;
 }

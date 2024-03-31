@@ -2,4 +2,28 @@
   min-height: 100%;
   padding: var(--main-padding-vert) var(--main-padding-horiz);
   background-color: var(--main-bg-color);
+  max-width: 100%;
+}
+
+
+h1 {
+  font-size: var(--section-heading-font-size);
+  color: var(--section-heading-color);
+  padding: 0 0.5rem;
+}
+
+.section-intro {
+  padding: 0 0.5rem;
+  margin: 2rem 0;
+}
+
+.gallery-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.gallery img {
+  max-width: 20vmax;
+  height: auto;
 }
