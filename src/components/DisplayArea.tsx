@@ -8,11 +8,12 @@ interface DisplayAreaProps {
 }
 
 function DisplayArea({ navItems, pageShowing, userImages }: DisplayAreaProps) {
+  console.log('SiteSection userImages', userImages)
   return (
     <div className='display-area'>
       <SiteSection
-        sectionData={navItems.filter(item => item.label === pageShowing)[0]}
-        userImages={pageShowing === 'gallery' ? userImages : null}
+        sectionData={navItems.filter(item => item.id == pageShowing)[0]}
+        userImages={userImages}
       />
     </div>
   )

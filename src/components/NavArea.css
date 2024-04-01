@@ -18,6 +18,7 @@ nav.nav-area {
   text-shadow: var(--nav-text-shadow-x) var(--nav-text-shadow-y) var(--nav-text-shadow-blur) var(--nav-text-shadow-color);
   /* text-shadow: 1rem 1rem 0rem black;  */
   transition: transform var(--hamburger-animation-duration) ease, opacity 300ms ease;
+  z-index: 1;
 }
 
 nav.nav-area:not(.visible) {

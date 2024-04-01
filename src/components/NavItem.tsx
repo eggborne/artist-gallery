@@ -26,7 +26,7 @@ function NavItem({ id, label, href, highlighted, onScreen, handleClickNavItem }:
   }); // no dep array means it runs every render
 
   function onClickNavItem() {
-    handleClickNavItem(href);
+    handleClickNavItem(id);
   }
 
   return (

@@ -34,18 +34,29 @@ function App() {
   const [userImages, setUserImages] = useState([] as any);
   const [userNavItems, setUserNavItems] = useState({} as any);
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [pageShowing, setPageShowing] = useState('gallery');
+  const [pageShowing, setPageShowing] = useState('0');
 
   const getImageArray = async (siteImages: any) => {
     const imagesRef = storageRef(storage, 'sites/' + SITE_ID + '/images');
-    const urls: object[] = [];
+    const imageArray: object[] = [];
     for (const image of siteImages) {
       const imageRef = storageRef(imagesRef, image.name);
       const url = await getDownloadURL(imageRef);
-      urls.push({ url, imageName: image.name, size: image.size });
+      imageArray.push({ url, ...image });
     }
-    return urls;
+    console.log('imageArray', imageArray)
+    return imageArray;
   };
+
+  const getImages = async () => {
+    const listRef = storageRef(storage, 'sites/' + SITE_ID + '/images');
+    list(listRef).then(async result => {
+      console.log('result', result.items)
+      const newImages = await getImageArray(result.items);
+      console.log('newImages', newImages)
+      setUserImages(newImages);
+    });
+  }
 
   useEffect(() => {
     const getPreferences = async () => {
@@ -59,6 +70,7 @@ function App() {
           const dataRef = ref(database, dbUrl);
           onValue(dataRef, (snapshot) => {
             const nextPrefs = snapshot.val();
+            console.log('got nextPrefs', nextPrefs);
             setUserPreferences(nextPrefs);
             return () => off(dataRef);
           });
@@ -76,27 +88,36 @@ function App() {
       }
     }
     getPreferences();
-    const listRef = storageRef(storage, 'sites/' + SITE_ID + '/images');
-    list(listRef).then(async result => {
-      const newImages = await getImageArray(result.items);
-      setUserImages(newImages);
-    });
+    getImages();
   }, []);
     
 
 
   useEffect(() => {
     applyCSSValues(userPreferences);
+    const nextNavItems = [];
+    for (let id in userPreferences.sections) {
+      const { label, href, textContent } = userPreferences.sections[id];
+      nextNavItems.push({ id, label, href, textContent, handleClickNavItem: changeNavRoute });
+    }
+    console.log('nextNavItems', nextNavItems)
+    setUserNavItems(nextNavItems);
   }, [userPreferences])
+
+  useEffect(() => {
+    // getImages();
+  }, [userImages])
 
   function toggleNavArea() {
     setNavShowing(!navShowing);
   }
 
-  function changeNavRoute(newRoute: string) {
-    setPageShowing(newRoute);
+  function changeNavRoute(newRoute: number | string) {
+    setPageShowing(newRoute as any);
     isMobile && toggleNavArea();
   }
+
+  console.log('app rendering')
 
   return (
     <>
