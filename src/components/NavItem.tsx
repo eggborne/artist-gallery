@@ -12,7 +12,7 @@ interface NavItemProps {
   handleClickNavItem: (newRoute: string) => void;
 }
 
-function NavItem({ id, label, href, highlighted, onScreen, handleClickNavItem }: NavItemProps) {
+function NavItem({ id, label, highlighted, onScreen, handleClickNavItem }: NavItemProps) {
   const [revealed, setRevealed] = useState(false);
   const navItemClass = classNames('nav-item', { highlighted }, { revealed });
   const delayTime = 200 + (parseInt(id[id.length - 1]) * 100);

@@ -67,11 +67,12 @@ button:focus {
   position: fixed;
   bottom: 0;
   left: 50%;
+  width: max-content;
   transform: translate(-50%, 0);
   color: #ff0000;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   line-height: 1.2;
-  opacity: 0.5;
+  opacity: 0.35;
   font-weight: bold;
   z-index: 2;
 }

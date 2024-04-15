@@ -1,6 +1,5 @@
 import Hamburger from './Hamburger';
 import './Header.css'
-import headerSVG from '../assets/rrg_header.svg';
 
 interface HeaderProps {
   hamburgerOpen: boolean,
