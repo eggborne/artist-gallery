@@ -31,6 +31,7 @@ h1 {
   padding: 1rem;
   background-color: rgb(52, 22, 27);
   border-radius: 0.5rem;
+  transition: all 200ms ease;
 }
 
 .gallery-tile-info {
@@ -45,7 +46,7 @@ h2 {
 }
 
 .gallery img {
-  max-width: 20vmax;
+  max-width: 50%;
   height: auto;
 }
 

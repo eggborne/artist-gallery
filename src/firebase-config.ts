@@ -2,10 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
+const firebaseApiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+const dbUrl = import.meta.env.VITE_DATABASE_URL;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBkJTNcO9Tg5q_4bnF9WvVgqrrEmeNk8Gw",
+  apiKey: firebaseApiKey,
   authDomain: "site-editor-70b42.firebaseapp.com",
-  databaseURL: "https://site-editor-70b42-default-rtdb.firebaseio.com",
+  databaseURL: dbUrl,
   projectId: "site-editor-70b42",
   storageBucket: "site-editor-70b42.appspot.com",
   messagingSenderId: "748460455351",

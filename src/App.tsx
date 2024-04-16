@@ -83,9 +83,9 @@ function App() {
               pageShowing={pageShowing}
               visible={navShowing}
             />
-            <DisplayArea
-              navSectionData={userNavItems.find((item: any) => item.id === pageShowing)}
-              userImages={Object.values(userPreferences.images)}
+          <DisplayArea
+            navSectionData={userNavItems.find((item: any) => item.id === pageShowing)}
+            userImages={userPreferences.images ? Object.values(userPreferences.images) : []}
             />
           </>
         }

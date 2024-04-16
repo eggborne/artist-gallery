@@ -9,7 +9,7 @@ interface SiteSectionProps {
 function SiteSection({ sectionData, userImages }: SiteSectionProps) {
   const siteSectionClass = classNames('site-section', 'gallery');
   console.log('sectionData', sectionData);
-  console.log('userImages', userImages)
+  console.log('userImages', userImages);
   return (
     <section className={siteSectionClass}>
       {sectionData.label && <h1>{sectionData.label}</h1>}
@@ -19,13 +19,15 @@ function SiteSection({ sectionData, userImages }: SiteSectionProps) {
           <div className='gallery-display'>
             {userImages.map((image, index) =>
             (<div className='gallery-tile' key={image.fileName}>
-              <img src={image.url} alt={`image ${index}`} />
+              <img src={image.url} alt={image.title} />
               <div className='gallery-tile-info'>
                 <h2>{image.title}</h2>
                 <div>{image.description}</div>
                 <div className='two-column'>
                   <div>{image.media}</div>
-                  <div>{image.dimensions.width}" x {image.dimensions.height}"</div>
+                  <div>{
+                    `${image.dimensions.width}${image.dimensions.unit === 'in.' ? '"' : image.dimensions.unit} x ${image.dimensions.height}${image.dimensions.unit === 'in.' ? '"' : image.dimensions.unit}`
+                  }</div>
                 </div>
               </div>
             </div>
