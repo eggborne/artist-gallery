@@ -81,7 +81,7 @@ button:focus {
 @media (min-aspect-ratio: 1) {
 
   :root {
-    --main-bg-color: red !important;
+    /* --main-bg-color: red !important; */
   }
 
   nav.nav-area {
