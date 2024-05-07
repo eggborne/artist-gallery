@@ -5,11 +5,19 @@ main {
   background-color: rgba(255, 255, 255, 0.704);
   width: 100vw;
   min-height: calc(var(--actual-height) - var(--header-height) - var(--footer-height));
+  white-space: pre-wrap;
 }
 
 h1 {
   font-size: var(--title-font-size); 
   color: var(--title-font-color);
+}
+
+.display-area {
+  /* position: relative; */
+  flex-grow: 1;
+  background: var(--main-bg-color);
+  width: 100%;
 }
 
 .horizontal-curve {
